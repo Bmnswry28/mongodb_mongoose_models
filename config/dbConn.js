@@ -1,14 +1,18 @@
+// فایل dbConn.js
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.DATABASE_URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true
+        const uri = 'mongodb://localhost:27017/your_database'; // جایگزین کنید با نام دیتابیس واقعی خود
+        await mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         });
-    } catch (err) {
-        console.error(err);
+        console.log('MongoDB connected successfully');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        process.exit(1);
     }
-}
+};
 
-module.exports = connectDB
+module.exports = connectDB;
